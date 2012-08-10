@@ -1,4 +1,4 @@
-TAO
+pyc
 ===
 
 python tools set
@@ -7,4 +7,6 @@ python tools set
 ## modules
 
 * core
+
+* http
 
