@@ -3,6 +3,9 @@ import os.path
 from distutils.core import setup
 
 
+NAME = 'pyc'
+
+
 def fullsplit(path, result=None):
     """
     Split a pathname into components (the opposite of os.path.join) in a
@@ -45,15 +48,15 @@ def get_sources(src):
 
 
 
-version = __import__('tao').get_version()
+version = __import__(NAME).get_version()
 
-packages, data_files = get_sources('tao')
+packages, data_files = get_sources(NAME)
 
 
 setup(
-    name = "Tao",
+    name = "pyc",
     version = version,
-    url = 'https://github.com/jimzhan/tao',
+    url = 'https://github.com/jimzhan/pyc',
     author = 'Jim Zhan',
     author_email = 'jim.zhan@me.com',
     packages = packages,

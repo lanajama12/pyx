@@ -2,37 +2,23 @@
 import logging
 
 from functools import wraps
-from timeit import default_timer as timer
+
+
+__all__ = ('memorize',)
 
 
 logger = logging.getLogger(__name__)
 
 
-__all__ = ('timeit', 'memorize',)
-
-
-def timeit(func):
-    """
-    Decorator that logs the cost time of a function.
-    """
-    @wraps(func)
-    def wrapped_func(*args, **kwargs):
-        start  = timer()
-        result = func(*args, **kwargs)
-        cost   = timer() - start
-        logger.debug('<method: %s> finished in %2.2f sec' % (func.__name__, cost))
-        return result
-    return wrapped_func
-
 
 __cache__ = {}
 
-def memorize(func, *args, **kwargs):
+def memorize(func):
     """
     Simply memorize the calculated result :data:`func`. previously returned.
 
     Simply cached all calculated results from the decorated method/function into
-    a global :data:`dict`.
+    a global `dict`.
     """
     @wraps(func)
     def wrapped_func(*args, **kwargs):

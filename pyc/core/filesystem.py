@@ -8,8 +8,8 @@ import os
 import shutil
 import itertools
 
-from tao.core import debug
-from tao.core import regex
+from pyc.core import debug
+from pyc.core import regex
 
 
 logger = debug.getLogger(__name__)
@@ -72,18 +72,13 @@ def find(pattern, path=os.path.curdir, recursive=False):
 
     if recursive:
         for base, dirs, files in os.walk(root, topdown=True):
-            for item in itertools.chain(filter(Finder, files), filter(Finder, dirs)):
-                p = os.path.join(base, item)
-                yield os.path.isfile(p) and File(p) or Folder(p)
+            for segment in itertools.chain(filter(Finder, files), filter(Finder, dirs)):
+                yield FS(os.path.join(base, segment))
 
     else:
         for segment in filter(Finder, os.listdir(root)):
-            p = os.path.join(root, segment)
-            yield os.path.isfile(p) and File(p) or Folder(p)
+            yield(os.path.join(root, segment))
 
-
-File = file
-class Folder(file): pass
 
 
 class FS(object):

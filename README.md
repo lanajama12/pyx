@@ -8,4 +8,3 @@ python tools set
 
 * core
 
-* filesystem

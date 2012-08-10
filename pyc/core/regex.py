@@ -4,7 +4,7 @@ Regular expression patterns & relative helpers.
 """
 import re
 
-from tao.core import consts
+from pyc.core import consts
 
 
 __all__ = ('email', 'latitude', 'longitude', 'geopt',

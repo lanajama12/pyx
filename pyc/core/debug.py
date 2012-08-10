@@ -1,15 +1,35 @@
 # -*- coding: utf-8 -*-
-r"""
-:mod:`debug` --- Common debug toolset. 
-==========================================
-
+"""
+Common debug tools set.
+=======================
 """
 import os
 import inspect
 import logging
+import functools
+
+from timeit import default_timer as timer
 
 
-__all__ = ('traceback', 'getLogger')
+__all__ = ('timeit', 'traceback', 'getLogger')
+
+
+logger = logging.getLogger(__name__)
+
+
+
+def timeit(func):
+    """
+    Decorator that logs the cost time of a function.
+    """
+    @functools.wraps(func)
+    def wrapped_func(*args, **kwargs):
+        start  = timer()
+        result = func(*args, **kwargs)
+        cost   = timer() - start
+        logger.debug('<method: %s> finished in %2.2f sec' % (func.__name__, cost))
+        return result
+    return wrapped_func
 
 
 
@@ -35,7 +55,7 @@ def traceback(frame, parent=False):
 
 
 class ColoredStreamHandler(logging.StreamHandler):
-
+    # Took from: https://gist.github.com/758430
     FORMAT = '[%(asctime)s][%(name)s][%(levelname)s] %(message)s'
 
     # color names to indices
@@ -172,10 +192,11 @@ class ColoredStreamHandler(logging.StreamHandler):
         return message
 
 
-def getLogger(package):
+def getLogger(package, level=logging.DEBUG):
     """Create stream based handler for logging with color support."""
     # reference to frame object *MUST* be deleted after use.
     # See <http://docs.python.org/library/inspect.html>
     logger = logging.getLogger(package)
     logger.addHandler(ColoredStreamHandler())
+    logger.setLevel(level)
     return logger
