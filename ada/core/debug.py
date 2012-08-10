@@ -5,8 +5,10 @@ Common debug tools set.
 """
 import os
 import inspect
-import logging
 import functools
+
+import logging
+import logging.config
 
 from timeit import default_timer as timer
 
@@ -192,11 +194,5 @@ class ColoredStreamHandler(logging.StreamHandler):
         return message
 
 
-def getLogger(package, level=logging.DEBUG):
-    """Create stream based handler for logging with color support."""
-    # reference to frame object *MUST* be deleted after use.
-    # See <http://docs.python.org/library/inspect.html>
-    logger = logging.getLogger(package)
-    logger.addHandler(ColoredStreamHandler())
-    logger.setLevel(level)
-    return logger
+
+logging.config.fileConfig(os.path.join(os.path.dirname(__file__), 'logging.conf'))

@@ -4,7 +4,7 @@ Regular expression patterns & relative helpers.
 """
 import re
 
-from pyc.core import consts
+from ada.core import consts
 
 
 __all__ = ('email', 'latitude', 'longitude', 'geopt',

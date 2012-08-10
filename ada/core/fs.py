@@ -6,13 +6,13 @@ from __future__ import with_statement
 
 import os
 import shutil
+import logging
 import itertools
 
-from pyc.core import debug
-from pyc.core import regex
+from ada.core import regex
 
 
-logger = debug.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 #==========================================================================================
 #   General/Common Properties 
@@ -62,7 +62,7 @@ def find(pattern, path=os.path.curdir, recursive=False):
         * path: root path to start searching, default is current working directory.
         * recursive: whether to recursively find the matched items from `path`, False by default
 
-    Returns
+    Returns:
         Generator of the matched items of Files/Folders.
     """
     root = realpath(path)
@@ -179,7 +179,24 @@ class FS(object):
 
 
 
+class File(FS):
 
-if __name__ == '__main__':
-    for item in find('regex.py', '~', True):
-        logger.error(item)
+    def create(self):
+        """
+        Create item under file system with its path.
+
+        Returns:
+            True if its path does not exist, False otherwise.
+        """
+        if not os.path.exists(self.path):
+            with open(self.path, 'w') as fileobj:
+                fileobj.write('')
+
+
+class Folder(FS):
+
+    def create(self):
+        """
+        Recursively create the folder using its path.
+        """
+        os.makedirs(self.path)
