@@ -117,8 +117,6 @@ class FS(object):
         Args:
             * dest: destination path to copy.
         """
-        assert self.exists, '<path: %s> does not exist'
-
         if os.path.isfile(self.path):
             shutil.copy2(self.path, dest)
         else:
@@ -132,8 +130,6 @@ class FS(object):
         Returns:
             True if its path does not exist, False otherwise.
         """
-        assert self.exists, '<path: %s> does not exist'
-
         if os.path.isfile(self.path):
             if not os.path.exists(self.path):
                 with open(self.path, 'w') as fileobj:
@@ -146,8 +142,6 @@ class FS(object):
         """
         Delete the file/folder itself from file system.
         """
-        assert self.exists, '<path: %s> does not exist'
-        
         if os.path.isfile(self.path):
             os.remove(self.path)
         else:

@@ -30,8 +30,13 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
+    entry_points = {
+        'console_scripts': [
+        ]
+    },
     install_requires=[         
-        'Unidecode',
+        'clint >= 0.3.1',
+        'Unidecode >= 0.04.9',
     ],
 
 )
