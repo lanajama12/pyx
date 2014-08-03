@@ -9,13 +9,13 @@ import shutil
 import logging
 import itertools
 
-from ada.core import regex
+from rex.core import regex
 
 
 logger = logging.getLogger(__name__)
 
 #==========================================================================================
-#   General/Common Properties 
+#   General/Common Properties
 #==========================================================================================
 sysroot = os.path.abspath('/')
 userdir = os.path.expanduser('~')
@@ -66,7 +66,7 @@ def find(pattern, path=os.path.curdir, recursive=False):
         Generator of the matched items of Files/Folders.
     """
     root = realpath(path)
-    
+
     Finder = lambda item: regex.is_regex(pattern) \
                     and pattern.match(item) or (pattern == item)
 

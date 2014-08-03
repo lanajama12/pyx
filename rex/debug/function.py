@@ -8,7 +8,7 @@ import inspect
 from functools import wraps
 from timeit import default_timer as timer
 
-from ada.debug.logger import get as getLogger
+from rex.debug.logger import get as getLogger
 
 
 __all__ = ('attr', 'timeit', 'traceback')

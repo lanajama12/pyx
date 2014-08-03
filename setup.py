@@ -9,7 +9,7 @@ namespace = packages[0]
 setup(
     name = namespace,
     version = __import__(namespace).get_version(),
-    url = 'https://github.com/jimzhan/ada',
+    url = 'https://github.com/jimzhan/rex',
     author = 'Jim Zhan',
     author_email = 'jim.zhan@me.com',
     packages = find_packages(),
@@ -18,7 +18,6 @@ setup(
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
-        'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache License',
         'Operating System :: OS Independent',
@@ -34,7 +33,7 @@ setup(
         'console_scripts': [
         ]
     },
-    install_requires=[         
+    install_requires=[
         'clint >= 0.3.1',
         'Unidecode >= 0.04.9',
     ],
